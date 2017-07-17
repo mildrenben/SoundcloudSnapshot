@@ -1,0 +1,32 @@
+@import './_vars';
+
+.Footer {
+	padding: 3em 0 5em;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	&_Left {
+		.Footer_Link {
+			color: $blue;
+			&:hover {
+				color: darken($blue, 10%);
+				text-decoration: underline;
+			}
+		}
+	}
+	&_Right {
+		.Footer_Link {
+			color: rgba(0,0,0,0.5);
+			font-size: 0.9em;
+			&:first-of-type {
+				margin-right: 1.5em;
+			}
+			&:hover {
+				color: rgba(0,0,0,0.65);
+			}
+		}
+	}
+	&_Link {
+		text-decoration: none;
+	}
+}
