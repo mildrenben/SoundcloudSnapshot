@@ -12,10 +12,7 @@ const downloadFollowing = document.querySelector('.Download--following');
 form.addEventListener('submit', e => {
   e.preventDefault();
   getResults(clientId.value, username.value);
-  //getResults('Ht5I655zJVGXL0B3VOaRVSbTf4M5rfMX', 'louiscole');
 });
-
-//'Ht5I655zJVGXL0B3VOaRVSbTf4M5rfMX'
 
 function paginate(response, prev = []) {
   return new Promise((resolve, reject) => {
