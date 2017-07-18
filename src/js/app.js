@@ -8,6 +8,7 @@ const errorUsername = document.querySelector('.Form_Error--username');
 const submitButton = document.querySelector('.Form_Submit');
 const downloadLikes = document.querySelector('.Download--likes');
 const downloadFollowing = document.querySelector('.Download--following');
+const info = document.querySelector('.Form_Info');
 
 form.addEventListener('submit', e => {
   e.preventDefault();
@@ -132,6 +133,7 @@ function animateButtons() {
   setTimeout(() => {
     downloadLikes.classList.toggle('Download--visible');
     downloadFollowing.classList.toggle('Download--visible');
+    info.classList.add('Form_Info--visible');
   }, 450);
 }
 
