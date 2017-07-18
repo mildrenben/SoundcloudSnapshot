@@ -1,0 +1,111 @@
+@import './_vars';
+
+.Form {
+  &_Label {
+    margin-bottom: 0.4em;
+    display: block;
+  }
+  &_Input {
+    width: 100%;
+    display: block;
+    line-height: 150%;
+    border-radius: 0.2em;
+    border: solid 1px rgba(0,0,0,0.15);
+    padding: 0.3em 0.6em;
+    margin-bottom: 2em;
+    transition: border-color 0.1s ease;
+    &:focus {
+      border-color: $blue;
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  &_Error {
+
+  }
+  &_Submit {
+    width: 8em;
+    height: 3.5em;
+    transition: width 0.2s ease-in-out, opacity 0.3s ease-out, transform 0.15s ease-out 0.15s;
+    position: relative;
+    .Form_Spinner {
+      opacity: 0;
+    }
+    &--loading.button {
+      width: 6em;
+      padding: 0 1.8em;
+      .Form_SubmitText {
+        opacity: 0;
+      }
+      .Form_Spinner {
+        opacity: 1;
+      }
+    }
+    &--hide {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    &--none.Button {
+      display: none;
+    }
+  }
+  &_SubmitText,
+  &_Spinner.div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.15s ease-in-out;
+  }
+  &_SubmitText {
+    color: white;
+  }
+  &_Spinner {
+    margin: 0 auto;
+    font-size: 1.5px;
+    $thickness: 2em;
+    border-top: $thickness solid rgba(255, 255, 255, 0.2);
+    border-right: $thickness solid rgba(255, 255, 255, 0.2);
+    border-bottom: $thickness solid rgba(255, 255, 255, 0.2);
+    border-left: $thickness solid #ffffff;
+    transform: translateZ(0);
+    animation: spinner 1.1s infinite linear;
+    &,
+    &:after {
+      border-radius: 50%;
+      width: 10em;
+      height: 10em;
+    }
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.Download {
+  &.Button {
+    pointer-events: none;
+    background: $green;
+    transition: opacity 0.3s ease-in 0.1s, transform 0.4s ease-in;
+    opacity: 0;
+    transform: translateY(6px);
+    &:hover {
+      background: darken($green, 5%);
+    }
+  }
+  &--visible.Button {
+    display: inline-block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+  &:first-of-type {
+    margin-right: 1em;
+  }
+}

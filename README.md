@@ -1,2 +1,2 @@
 # SoundcloudSnapshot
-Download all of your Soundcloud likes, reposts and following lists.
+Backup and download a list of your Soundcloud likes and following

@@ -3,6 +3,9 @@ window.onload = () => {
 const form = document.querySelector('form');
 const clientId = document.querySelector('.Form_Input--clientId');
 const username = document.querySelector('.Form_Input--username');
+const errorClientId = document.querySelector('.Form_Error--clientId');
+const errorUsername = document.querySelector('.Form_Error--username');
+const submitButton = document.querySelector('.Form_Submit');
 const downloadLikes = document.querySelector('.Download--likes');
 const downloadFollowing = document.querySelector('.Download--following');
 
@@ -32,7 +35,13 @@ function getResults(clientId, username) {
   const userId = new Promise((resolve, reject) => {
     fetch(`https://api.soundcloud.com/users/${username}?client_id=${clientId}`)
       .then(res => res.json())
-      .then(res => resolve(res.id));
+      .catch(err => {
+        console.log('err', err.message);
+      })
+      .then(res => {
+        submitButton.classList.add('Form_Submit--loading');
+        resolve(res.id)
+      });
   });
 
   const following = new Promise((resolve, reject) => {
@@ -68,6 +77,8 @@ function getResults(clientId, username) {
 
       downloadLikes.href = URL.createObjectURL(likesFile);
       downloadFollowing.href = URL.createObjectURL(followingFile);
+
+      animateButtons();
     });
 }
 
@@ -103,4 +114,22 @@ function trimLikes(likes) {
   })
 }
 
+function animateButtons() {
+  submitButton.classList.add('Form_Submit--hide');
+  
+  setTimeout(() => submitButton.classList.add('Form_Submit--none'), 410);
+
+  setTimeout(() => {
+    downloadLikes.classList.toggle('Download--visible');
+    downloadFollowing.classList.toggle('Download--visible');
+  }, 450);
 }
+
+}
+
+
+// TODO
+
+// Error handling for wrong client id or username
+
+// Header elements and GA

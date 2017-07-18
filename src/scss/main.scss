@@ -3,5 +3,47 @@
 
 .Main {
   padding: 2em 0;
-  background: $paper;
+  &_Wrapper {
+    display: flex;
+  }
+  &_Left,
+  &_Right {
+    width: 50%;
+  }
+  &_Left {
+    margin-right: 5em;
+  }
+  &_Right {
+    margin-left: 5em;
+    margin-top: 4.5em;
+  }
+  &_Header {
+    font-size: 2em;
+    font-weight: 600;
+  }
+  &_Instructions {
+    color: $grey;
+    line-height: 140%;
+  }
+  &_Highlight {
+    padding: 0.2em 0.5em;
+    background: lighten($paper, 2%);
+    color: darken($grey, 15%);
+    border-radius: 0.2em;
+    margin-top: 0.2em;
+    display: inline-block;
+  }
+  @media screen and (max-width: 90em) {
+    &_Wrapper {
+      flex-direction: column;
+    }
+    &_Left,
+    &_Right {
+      width: 100%;
+      margin: 0;
+    }
+    &_Right {
+      margin-top: 2em;
+    }
+  }
 }
