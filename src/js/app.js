@@ -15,7 +15,6 @@ form.addEventListener('submit', e => {
   ga('send', 'event', 'Submit Button', 'Click');
   clearErrors();
   const correctUsername = username.value.startsWith('https://soundcloud.com/') ? username.value.substr(23) : username.value;
-  console.log('CCCC', correctUsername);
   getResults(clientId.value, correctUsername);
 });
 
