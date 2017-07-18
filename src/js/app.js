@@ -12,6 +12,7 @@ const downloadFollowing = document.querySelector('.Download--following');
 form.addEventListener('submit', e => {
   e.preventDefault();
   ga('send', 'event', 'Submit Button', 'Click');
+  clearErrors();
   getResults(clientId.value, username.value);
 });
 
@@ -32,14 +33,22 @@ function paginate(response, prev = []) {
 function getResults(clientId, username) {
   const userId = new Promise((resolve, reject) => {
     fetch(`https://api.soundcloud.com/users/${username}?client_id=${clientId}`)
-      .then(res => res.json())
       .catch(err => {
-        ga('send', 'event', 'Results', 'Failed');
-        console.log('err', err.message);
+        throwError('clientId');
+        reject(err);
       })
       .then(res => {
-        submitButton.classList.add('Form_Submit--loading');
-        resolve(res.id)
+        if (res.status === 404) {
+          throwError('username');
+          reject();
+        }
+        return res.json()
+      })
+      .then(res => {
+        if (res) {
+          submitButton.classList.add('Form_Submit--loading');
+          resolve(res.id)
+        }
       });
   });
 
@@ -126,11 +135,28 @@ function animateButtons() {
   }, 450);
 }
 
+function throwError(type) {
+  if (type === 'clientId') {
+    ga('send', 'event', 'Results', 'Failed - Client ID');
+    errorClientId.textContent = 'Incorrect Client ID';
+    clientId.classList.add('Form_Input--error');
+  } else if (type === 'username') {
+    ga('send', 'event', 'Results', 'Failed - Username');
+    errorUsername.textContent = 'Username not found';
+    username.classList.add('Form_Input--error');
+  }
+}
+
+function clearErrors() {
+  errorClientId.textContent = '';
+  errorUsername.textContent = '';
+  clientId.classList.remove('Form_Input--error');
+  username.classList.remove('Form_Input--error');
+}
+
 }
 
 
 // TODO
 
 // Error handling for wrong client id or username
-
-// Header elements and GA

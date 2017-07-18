@@ -12,16 +12,21 @@
     border-radius: 0.2em;
     border: solid 1px rgba(0,0,0,0.15);
     padding: 0.3em 0.6em;
-    margin-bottom: 2em;
     transition: border-color 0.1s ease;
     &:focus {
       border-color: $blue;
       outline: none;
       box-shadow: none;
     }
+    &--error {
+      border-color: $red;
+    }
   }
   &_Error {
-
+    font-size: 0.8em;
+    color: $red;
+    margin: 0.5em 0 2em;
+    display: block;
   }
   &_Submit {
     width: 8em;
