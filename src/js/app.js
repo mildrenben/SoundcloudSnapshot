@@ -11,6 +11,7 @@ const downloadFollowing = document.querySelector('.Download--following');
 
 form.addEventListener('submit', e => {
   e.preventDefault();
+  ga('send', 'event', 'Submit Button', 'Click');
   getResults(clientId.value, username.value);
 });
 
@@ -33,6 +34,7 @@ function getResults(clientId, username) {
     fetch(`https://api.soundcloud.com/users/${username}?client_id=${clientId}`)
       .then(res => res.json())
       .catch(err => {
+        ga('send', 'event', 'Results', 'Failed');
         console.log('err', err.message);
       })
       .then(res => {
@@ -76,6 +78,8 @@ function getResults(clientId, username) {
       downloadFollowing.href = URL.createObjectURL(followingFile);
 
       animateButtons();
+
+      ga('send', 'event', 'Results', 'Delivered');
     });
 }
 
