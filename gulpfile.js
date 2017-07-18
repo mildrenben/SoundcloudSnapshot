@@ -17,7 +17,7 @@ gulp.task('sass', () => {
     concat('style.css'),
     autoprefixer({ browsers: ['last 2 versions'] }),
     minifyCss(),
-    gulp.dest('prod/css'),
+    gulp.dest('docs/css'),
     browserSync.stream({match: '**/*.css'})
   ]);
 });
@@ -26,7 +26,7 @@ gulp.task('html', () => {
   pump([
     gulp.src('src/**/*.html'),
     htmlmin({ collapseWhitespace: true, removeComments: true }),
-    gulp.dest('prod')
+    gulp.dest('docs')
   ]);
 });
 
@@ -35,7 +35,7 @@ gulp.task('js', () => {
     gulp.src('src/js/**/*.js'),
     babel({ presets: ['es2015'] }),
     uglify(),
-    gulp.dest('prod/js'),
+    gulp.dest('docs/js'),
     browserSync.stream()
   ]);
 });
@@ -44,14 +44,14 @@ gulp.task('image', () => {
   pump([
     gulp.src('src/img/*'),
     imagemin({ verbose: true }),
-    gulp.dest('prod/img')
+    gulp.dest('docs/img')
   ]);
 });
 
 gulp.task('browserSync', ['sass', 'js', 'html', 'image'], function() {
   browserSync.init({
     injectChanges: true,
-    server: './prod'
+    server: './docs'
   });
 
   gulp.watch('src/scss/**/*.scss', ['sass']);
