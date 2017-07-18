@@ -46,7 +46,7 @@ function getResults(clientId, username) {
         return res.json()
       })
       .then(res => {
-        if (res) {
+        if (res.id) {
           submitButton.classList.add('Form_Submit--loading');
           resolve(res.id)
         }
@@ -157,8 +157,3 @@ function clearErrors() {
 }
 
 }
-
-
-// TODO
-
-// Error handling for wrong client id or username
